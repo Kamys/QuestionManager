@@ -43,7 +43,7 @@ public class Test {
         for (Question question : questions) {
             boolean b = question.checkAnswer();
             if (b) {
-                recruitedScore = +question.getPoints();
+                recruitedScore = recruitedScore + question.getPoints();
             }
         }
         return recruitedScore;
