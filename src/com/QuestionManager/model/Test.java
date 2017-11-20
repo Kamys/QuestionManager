@@ -1,50 +1,52 @@
 package com.QuestionManager.model;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class Test {
     private String name;
-    private int numberQuestions;
-    private int minimumPoints;
+    private int minimumScore;
     private List<Question> questions = new ArrayList<>();
+    private Iterator<Question> iteratorQuestions;
 
-    public Test(String name, int numberQuestions, int minimumPoints, List<Question> questions) {
+    public Test(String name, int minimumScore, List<Question> questions) {
         this.name = name;
-        this.numberQuestions = numberQuestions;
-        this.minimumPoints = minimumPoints;
+        this.minimumScore = minimumScore;
         this.questions = questions;
+        this.iteratorQuestions = questions.iterator();
     }
 
-    public String getName() {
-        return name;
+    public boolean hasNextQuestion() {
+        return iteratorQuestions.hasNext();
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public Question nextQuestion() {
+        return iteratorQuestions.next();
     }
 
-    public int getNumberQuestions() {
-        return numberQuestions;
+
+    public TestResult createTestResult() {
+        int recruitedScore = countRecruitedScore();
+        boolean isSuccessful = minimumScore <= recruitedScore;
+        return new TestResult(
+                recruitedScore,
+                minimumScore,
+                isSuccessful);
     }
 
-    public void setNumberQuestions(int numberQuestions) {
-        this.numberQuestions = numberQuestions;
+    /**
+     * @return Количество набранных баллов.
+     */
+    private int countRecruitedScore() {
+        int recruitedScore = 0;
+        for (Question question : questions) {
+            boolean b = question.checkAnswer();
+            if (b) {
+                recruitedScore = +question.getPoints();
+            }
+        }
+        return recruitedScore;
     }
 
-    public int getMinimumPoints() {
-        return minimumPoints;
-    }
-
-    public void setMinimumPoints(int minimumPoints) {
-        this.minimumPoints = minimumPoints;
-    }
-
-    public List<Question> getQuestions() {
-        return questions;
-    }
-
-    public void setQuestions(List<Question> questions) {
-        this.questions = questions;
-    }
 }

@@ -2,11 +2,14 @@ package com.QuestionManager.view;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class QuestionView extends BaseJFrame {
+public class QuestionView extends View {
 
-    private final JLabel question;
-    private final JLabel inputAnswer;
+    private final JLabel questionLabel;
+    private final JTextField answerTextField;
+    private final JButton replyButton;
 
     public QuestionView() throws HeadlessException {
         super("Вопрос");
@@ -14,18 +17,19 @@ public class QuestionView extends BaseJFrame {
         Box boxQuestion = Box.createHorizontalBox();
         boxQuestion.add(new JLabel("Вопрос: "));
         boxQuestion.add(Box.createHorizontalStrut(10));
-        question = new JLabel("В каком году родился А.С. Пушкин?");
-        boxQuestion.add(question);
+        questionLabel = new JLabel("В каком году родился А.С. Пушкин?");
+        boxQuestion.add(questionLabel);
         add(boxQuestion);
 
         Box boxInputAnswer = Box.createHorizontalBox();
-        inputAnswer = new JLabel("Ответ: ");
-        boxInputAnswer.add(inputAnswer);
+        boxInputAnswer.add(new JLabel("Ответ: "));
         boxInputAnswer.add(Box.createHorizontalStrut(10));
-        boxInputAnswer.add(new JTextField(15));
+        answerTextField = new JTextField(15);
+        boxInputAnswer.add(answerTextField);
 
         Box boxButton = Box.createHorizontalBox();
-        boxButton.add(new JButton("Ответить"));
+        replyButton = new JButton("Ответить");
+        boxButton.add(replyButton);
 
         add(boxQuestion);
         add(Box.createHorizontalStrut(10));
@@ -33,11 +37,22 @@ public class QuestionView extends BaseJFrame {
         add(boxButton);
     }
 
-    public JLabel getQuestion() {
-        return question;
+    private void reset() {
+        for (ActionListener al : replyButton.getActionListeners()) {
+            replyButton.removeActionListener(al);
+        }
+        questionLabel.setText("");
+        answerTextField.setText("");
     }
 
-    public JLabel getInputAnswer() {
-        return inputAnswer;
+    public void showQuestion(String question, ActionListener replyListener) {
+        reset();
+        questionLabel.setText(question);
+        replyButton.addActionListener(replyListener);
+        showFrame();
+    }
+
+    public JTextField getAnswerTextField() {
+        return answerTextField;
     }
 }

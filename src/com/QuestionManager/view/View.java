@@ -3,9 +3,9 @@ package com.QuestionManager.view;
 import javax.swing.*;
 import java.awt.*;
 
-public class BaseJFrame extends JFrame {
+public class View extends JFrame {
 
-    public BaseJFrame(String title) throws HeadlessException {
+    public View(String title) throws HeadlessException {
         super(title);
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         initPanel();
@@ -28,5 +28,10 @@ public class BaseJFrame extends JFrame {
         Box mainBox = Box.createVerticalBox();
         mainBox.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
         setContentPane(mainBox);
+    }
+
+    public void Hide() {
+        setVisible(false);
+        dispose();
     }
 }

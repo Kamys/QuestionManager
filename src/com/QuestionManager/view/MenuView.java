@@ -6,7 +6,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class MenuView extends BaseJFrame {
+public class MenuView extends View {
 
     public MenuView() throws HeadlessException {
         super("Меню");
@@ -42,7 +42,7 @@ public class MenuView extends BaseJFrame {
     private class PassTestListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            BaseJFrame frame = new QuestionView();
+            View frame = new QuestionView();
             frame.showFrame();
         }
     }

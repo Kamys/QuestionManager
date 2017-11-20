@@ -1,26 +1,31 @@
 package com.QuestionManager.model;
 
 
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
-
 public class Question {
-    private String QuestionText;
-    private String Answer;
+    private String questionText;
+    private String correctAnswer;
+    private String userAnswer;
+    private int points;
 
-    public Question(String questionText, String answer) {
-        QuestionText = questionText;
-        Answer = answer;
+    public Question(String questionText, String correctAnswer, int points) {
+        this.questionText = questionText;
+        this.correctAnswer = correctAnswer;
+        this.points = points;
+    }
+
+    public int getPoints() {
+        return points;
     }
 
     public String getQuestionText() {
-        return QuestionText;
+        return questionText;
     }
 
-    public void setAnswer(String answer) {
-        Answer = answer;
+    public void setUserAnswer(String userAnswer) {
+        this.userAnswer = userAnswer;
     }
 
-    public boolean checkAnsver(){
-        throw new NotImplementedException();
+    public boolean checkAnswer(){
+        return correctAnswer.equals(userAnswer);
     }
 }

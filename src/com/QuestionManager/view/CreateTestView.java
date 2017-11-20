@@ -3,7 +3,7 @@ package com.QuestionManager.view;
 import javax.swing.*;
 import java.awt.*;
 
-public class CreateTestView extends BaseJFrame {
+public class CreateTestView extends View {
     public CreateTestView() throws HeadlessException {
         super("Добавление теста");
 
